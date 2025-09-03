@@ -115,52 +115,47 @@ const BusinessCardMaker = () => {
     const drawTemplateIndicators = () => {
       const template = templates[design.template];
       
-      // Set clear, visible styling for AI-friendly indicators
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.8)'; // Blue color for visibility
-      ctx.lineWidth = 2;
-      ctx.setLineDash([6, 4]); // Clear dashed pattern
-      ctx.fillStyle = 'rgba(59, 130, 246, 0.1)'; // Light blue background
+      // Use extremely subtle indicators that won't interfere with AI composition
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)'; // Very light gray
+      ctx.lineWidth = 1;
+      ctx.setLineDash([]); // No dashes to avoid AI confusion
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.02)'; // Almost transparent
       
       Object.entries(template).forEach(([field, pos]) => {
         const width = pos.width || pos.size * 6;
         const height = pos.height || pos.size + 8;
         
-        let rectX = pos.x - 8;
+        let rectX = pos.x - 4;
         
         if (pos.align === 'center') {
-          rectX = pos.x - (width / 2) - 8;
+          rectX = pos.x - (width / 2) - 4;
         } else if (pos.align === 'right') {
-          rectX = pos.x - width - 8;
+          rectX = pos.x - width - 4;
         }
         
-        const rectY = pos.y - pos.size - 6;
+        const rectY = pos.y - pos.size - 3;
         
-        // Fill with light background
-        ctx.fillRect(rectX, rectY, width + 16, height + 8);
+        // Only add very subtle corner dots for AI alignment
+        const dotSize = 2;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; // Subtle gray dots
         
-        // Draw dashed border
-        ctx.strokeRect(rectX, rectY, width + 16, height + 8);
+        // Minimal corner markers - just small dots
+        ctx.beginPath();
+        ctx.arc(rectX, rectY, dotSize, 0, 2 * Math.PI);
+        ctx.fill();
         
-        // Add field label
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.7)';
-        ctx.font = '10px Arial';
-        ctx.setLineDash([]); // Solid for text
-        ctx.fillText(field.toUpperCase(), rectX + 4, rectY - 2);
+        ctx.beginPath();
+        ctx.arc(rectX + width + 8, rectY, dotSize, 0, 2 * Math.PI);
+        ctx.fill();
         
-        // Add corner guides for precise alignment
-        const cornerSize = 4;
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.9)';
+        ctx.beginPath();
+        ctx.arc(rectX, rectY + height + 6, dotSize, 0, 2 * Math.PI);
+        ctx.fill();
         
-        // Corner markers
-        ctx.fillRect(rectX, rectY, cornerSize, cornerSize);
-        ctx.fillRect(rectX + width + 12, rectY, cornerSize, cornerSize);
-        ctx.fillRect(rectX, rectY + height + 4, cornerSize, cornerSize);
-        ctx.fillRect(rectX + width + 12, rectY + height + 4, cornerSize, cornerSize);
-        
-        ctx.setLineDash([6, 4]); // Reset for next iteration
+        ctx.beginPath();
+        ctx.arc(rectX + width + 8, rectY + height + 6, dotSize, 0, 2 * Math.PI);
+        ctx.fill();
       });
-      
-      ctx.setLineDash([]);
     };
 
     // Draw background
@@ -372,50 +367,50 @@ const BusinessCardMaker = () => {
                         const width = pos.width || 150;
                         const height = pos.height || pos.size + 8;
                         
-                        let rectX = pos.x - 8;
+                        let rectX = pos.x - 4;
                         if (pos.align === 'center') {
-                          rectX = pos.x - (width / 2) - 8;
+                          rectX = pos.x - (width / 2) - 4;
                         } else if (pos.align === 'right') {
-                          rectX = pos.x - width - 8;
+                          rectX = pos.x - width - 4;
                         }
                         
-                        const rectY = pos.y - pos.size - 6;
+                        const rectY = pos.y - pos.size - 3;
                         
                         return (
                           <div key={`indicator-${field}`}>
-                            {/* Field background */}
+                            {/* Subtle field outline */}
                             <div
-                              className="absolute bg-template-indicator-bg border-2 border-dashed border-template-indicator rounded-md"
+                              className="absolute border border-gray-300/30 rounded bg-gray-100/10"
                               style={{
                                 left: `${rectX}px`,
                                 top: `${rectY}px`,
-                                width: `${width + 16}px`,
-                                height: `${height + 8}px`
+                                width: `${width + 8}px`,
+                                height: `${height + 6}px`
                               }}
                             />
-                            {/* Field label */}
+                            {/* Field label outside the card area */}
                             <div
-                              className="absolute text-xs font-bold text-template-indicator bg-white px-1 rounded"
-                              style={{
-                                left: `${rectX + 4}px`,
-                                top: `${rectY - 16}px`
-                              }}
-                            >
-                              {field.toUpperCase()}
-                            </div>
-                            {/* Corner markers */}
-                            <div
-                              className="absolute w-1 h-1 bg-template-indicator rounded-full"
+                              className="absolute text-xs font-medium text-gray-500 bg-white/90 px-2 py-1 rounded shadow-sm border"
                               style={{
                                 left: `${rectX}px`,
-                                top: `${rectY}px`
+                                top: `${rectY - 24}px`
+                              }}
+                            >
+                              {field}
+                            </div>
+                            {/* Minimal corner dots */}
+                            <div
+                              className="absolute w-1.5 h-1.5 bg-blue-400/60 rounded-full"
+                              style={{
+                                left: `${rectX - 1}px`,
+                                top: `${rectY - 1}px`
                               }}
                             />
                             <div
-                              className="absolute w-1 h-1 bg-template-indicator rounded-full"
+                              className="absolute w-1.5 h-1.5 bg-blue-400/60 rounded-full"
                               style={{
-                                left: `${rectX + width + 15}px`,
-                                top: `${rectY}px`
+                                left: `${rectX + width + 7}px`,
+                                top: `${rectY - 1}px`
                               }}
                             />
                           </div>
