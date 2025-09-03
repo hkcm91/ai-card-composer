@@ -113,49 +113,8 @@ const BusinessCardMaker = () => {
     canvas.height = 240;
 
     const drawTemplateIndicators = () => {
-      const template = templates[design.template];
-      
-      // Use extremely subtle indicators that won't interfere with AI composition
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)'; // Very light gray
-      ctx.lineWidth = 1;
-      ctx.setLineDash([]); // No dashes to avoid AI confusion
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.02)'; // Almost transparent
-      
-      Object.entries(template).forEach(([field, pos]) => {
-        const width = pos.width || pos.size * 6;
-        const height = pos.height || pos.size + 8;
-        
-        let rectX = pos.x - 4;
-        
-        if (pos.align === 'center') {
-          rectX = pos.x - (width / 2) - 4;
-        } else if (pos.align === 'right') {
-          rectX = pos.x - width - 4;
-        }
-        
-        const rectY = pos.y - pos.size - 3;
-        
-        // Only add very subtle corner dots for AI alignment
-        const dotSize = 2;
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; // Subtle gray dots
-        
-        // Minimal corner markers - just small dots
-        ctx.beginPath();
-        ctx.arc(rectX, rectY, dotSize, 0, 2 * Math.PI);
-        ctx.fill();
-        
-        ctx.beginPath();
-        ctx.arc(rectX + width + 8, rectY, dotSize, 0, 2 * Math.PI);
-        ctx.fill();
-        
-        ctx.beginPath();
-        ctx.arc(rectX, rectY + height + 6, dotSize, 0, 2 * Math.PI);
-        ctx.fill();
-        
-        ctx.beginPath();
-        ctx.arc(rectX + width + 8, rectY + height + 6, dotSize, 0, 2 * Math.PI);
-        ctx.fill();
-      });
+      // NO INDICATORS AT ALL for clean AI templates
+      // The template will be completely clean with no visual markers
     };
 
     // Draw background
