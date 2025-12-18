@@ -1,0 +1,173 @@
+{
+  "$schema": "../../core/schemas/widget.schema.json",
+  "version": "1.0.0",
+  "metadata": {
+    "id": "business-card",
+    "name": "Business Card",
+    "description": "Professional business cards with AI-enhanced backgrounds for networking and corporate use",
+    "category": "professional",
+    "tags": ["business", "corporate", "networking", "professional", "contact"],
+    "icon": "briefcase",
+    "thumbnail": "./assets/thumbnail.png"
+  },
+
+  "canvas": {
+    "width": 1050,
+    "height": 600,
+    "unit": "px",
+    "aspectRatio": "1.75:1",
+    "previewScale": 0.38,
+    "bleed": {
+      "enabled": true,
+      "size": 9
+    },
+    "safeZone": {
+      "enabled": true,
+      "margin": 36
+    },
+    "printSize": {
+      "width": 3.5,
+      "height": 2,
+      "unit": "in"
+    }
+  },
+
+  "fields": [
+    {
+      "id": "name",
+      "type": "text",
+      "label": "Full Name",
+      "placeholder": "John Doe",
+      "required": true,
+      "maxLength": 50,
+      "defaultValue": "",
+      "style": {
+        "fontFamily": "Inter",
+        "fontSize": { "min": 18, "max": 36, "default": 24 },
+        "fontWeight": ["normal", "bold"],
+        "defaultWeight": "bold"
+      }
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Job Title",
+      "placeholder": "Creative Director",
+      "required": false,
+      "maxLength": 60,
+      "style": {
+        "fontFamily": "Inter",
+        "fontSize": { "min": 12, "max": 24, "default": 16 },
+        "fontWeight": ["normal", "light"],
+        "defaultWeight": "normal"
+      }
+    },
+    {
+      "id": "company",
+      "type": "text",
+      "label": "Company",
+      "placeholder": "Design Studio",
+      "required": false,
+      "maxLength": 60,
+      "style": {
+        "fontFamily": "Inter",
+        "fontSize": { "min": 10, "max": 18, "default": 14 },
+        "textTransform": "uppercase",
+        "letterSpacing": "0.05em"
+      }
+    },
+    {
+      "id": "phone",
+      "type": "text",
+      "label": "Phone",
+      "placeholder": "+1 (555) 123-4567",
+      "required": false,
+      "maxLength": 30,
+      "validation": {
+        "pattern": "^[+]?[\\d\\s()-]+$",
+        "message": "Please enter a valid phone number"
+      }
+    },
+    {
+      "id": "email",
+      "type": "text",
+      "label": "Email",
+      "placeholder": "john@designstudio.com",
+      "required": false,
+      "maxLength": 60,
+      "validation": {
+        "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+        "message": "Please enter a valid email address"
+      }
+    },
+    {
+      "id": "website",
+      "type": "text",
+      "label": "Website",
+      "placeholder": "www.designstudio.com",
+      "required": false,
+      "maxLength": 60
+    },
+    {
+      "id": "logo",
+      "type": "image",
+      "label": "Company Logo",
+      "required": false,
+      "maxSize": "2MB",
+      "acceptedFormats": ["png", "svg", "jpg", "webp"],
+      "dimensions": {
+        "maxWidth": 200,
+        "maxHeight": 100
+      }
+    },
+    {
+      "id": "qrCode",
+      "type": "generated",
+      "generator": "qrcode",
+      "source": "website",
+      "label": "QR Code",
+      "required": false,
+      "conditional": {
+        "dependsOn": "website",
+        "condition": "isNotEmpty"
+      }
+    }
+  ],
+
+  "templates": {
+    "default": "modern",
+    "available": ["modern", "classic", "minimal", "executive", "creative"]
+  },
+
+  "prompts": {
+    "backend": "./prompts/backend.json",
+    "frontend": "./prompts/frontend.json"
+  },
+
+  "assets": {
+    "fonts": ["Inter", "Playfair Display", "Roboto", "Montserrat"],
+    "icons": "./assets/icons/",
+    "reference": "./assets/reference/"
+  },
+
+  "export": {
+    "formats": ["png", "pdf", "jpg"],
+    "defaultFormat": "png",
+    "resolutions": {
+      "web": { "dpi": 72, "scale": 1 },
+      "print": { "dpi": 300, "scale": 4.17 },
+      "retina": { "dpi": 144, "scale": 2 }
+    }
+  },
+
+  "aiWorkflow": {
+    "enabled": true,
+    "provider": "auto",
+    "features": {
+      "backgroundGeneration": true,
+      "styleTransfer": true,
+      "colorHarmonization": true,
+      "textEnhancement": false
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "version": "1.0.0",
+  "provider": "universal",
+
+  "systemPrompt": {
+    "role": "You are a talented greeting card designer with expertise in creating warm, celebratory birthday card designs that bring joy and convey heartfelt sentiments.",
+    "context": "Generate festive, appealing birthday card backgrounds and designs that create the perfect canvas for personalized messages. The designs should evoke celebration while maintaining elegance.",
+    "constraints": [
+      "Reserve prominent text areas for the greeting (top 30%) and message (middle-bottom 40%)",
+      "Create visually balanced compositions that don't compete with text",
+      "Use celebratory imagery that's universally appealing",
+      "Avoid placing detailed elements in text overlay zones",
+      "Maintain a joyful, positive mood appropriate for celebrations",
+      "Consider the card may be folded - design for front panel primarily"
+    ]
+  },
+
+  "templates": {
+    "backgroundGeneration": {
+      "base": "Create a beautiful {theme} birthday card background. The design should be {mood} and perfect for celebrating {occasion}. Dimensions: {width}x{height} pixels.",
+      "variables": {
+        "theme": [
+          "festive with balloons and confetti",
+          "elegant with gold accents",
+          "playful and colorful",
+          "sophisticated floral",
+          "modern minimalist",
+          "vintage retro",
+          "whimsical illustrated",
+          "nature-inspired"
+        ],
+        "mood": [
+          "joyful and celebratory",
+          "warm and heartfelt",
+          "fun and energetic",
+          "elegant and refined",
+          "cute and playful",
+          "sophisticated and classy"
+        ],
+        "occasion": [
+          "a special birthday",
+          "a milestone birthday",
+          "a child's birthday",
+          "a sweet 16",
+          "a 21st birthday",
+          "a 30th birthday",
+          "a 50th birthday",
+          "a golden birthday"
+        ]
+      },
+      "modifiers": {
+        "textSafeZones": "Keep the center area ({centerZone}%) relatively clear for the main greeting text. The bottom portion should accommodate a personal message.",
+        "colorHarmony": "Use a color palette of {primaryColor} and complementary colors. The overall feeling should be {mood}.",
+        "ageSpecific": "This is for a {age} year old. {ageGuidance}",
+        "photoSpace": "If using photo template, reserve a {photoShape} area at position {photoPosition} for photo placement."
+      }
+    },
+
+    "styleTransfer": {
+      "base": "Apply the cheerful, celebratory style of the reference image to create a new birthday card background.",
+      "referenceHandling": "Capture the color palette, decorative elements, and overall festive mood while creating a unique design suitable for text overlay."
+    },
+
+    "compositing": {
+      "nanaBanana": {
+        "prompt": "Composite these celebratory elements into a cohesive birthday card design that feels warm and inviting.",
+        "layers": [
+          { "type": "background", "source": "{backgroundBase}", "blendMode": "normal" },
+          { "type": "decoration", "source": "{celebratoryElements}", "blendMode": "normal" },
+          { "type": "overlay", "source": "{textureOverlay}", "blendMode": "soft-light", "opacity": 0.3 },
+          { "type": "accent", "source": "{sparkleEffects}", "blendMode": "screen", "opacity": 0.6 }
+        ]
+      }
+    }
+  },
+
+  "qualityEnhancers": [
+    "cheerful and inviting",
+    "high quality illustration",
+    "vibrant colors",
+    "professional greeting card quality",
+    "balanced composition",
+    "print-ready",
+    "festive atmosphere",
+    "warm and welcoming"
+  ],
+
+  "negativePrompts": [
+    "text",
+    "letters",
+    "words",
+    "numbers unless decorative",
+    "sad",
+    "dark",
+    "scary",
+    "blurry",
+    "low quality",
+    "cluttered",
+    "overwhelming patterns",
+    "inappropriate imagery",
+    "copyright characters",
+    "brand logos"
+  ],
+
+  "ageGuidance": {
+    "child": "Use bright, primary colors, playful cartoon elements, and fun imagery like balloons, cake, and party hats.",
+    "teen": "Incorporate trendy elements, bold colors, and contemporary design aesthetics.",
+    "young-adult": "Balance fun and sophistication with modern, stylish design elements.",
+    "adult": "Use elegant design elements, refined color palettes, and tasteful decorations.",
+    "senior": "Opt for classic, timeless designs with warm colors and elegant floral or traditional elements."
+  },
+
+  "stylePresets": {
+    "festive-balloons": {
+      "prompt": "Colorful celebration with floating balloons, confetti, and party streamers against a cheerful backdrop",
+      "enhancers": ["balloons", "confetti", "streamers", "party atmosphere"],
+      "colorBias": "bright multicolor, festive palette"
+    },
+    "elegant-gold": {
+      "prompt": "Sophisticated design with gold accents, subtle sparkles, and refined decorative elements",
+      "enhancers": ["gold foil accents", "elegant typography space", "subtle shimmer", "refined borders"],
+      "colorBias": "cream, gold, champagne, blush pink"
+    },
+    "kids-party": {
+      "prompt": "Fun, playful design with cartoon-style elements, bright colors, and whimsical decorations",
+      "enhancers": ["cartoon style", "playful shapes", "party elements", "cake and presents"],
+      "colorBias": "bright primary colors, rainbow palette"
+    },
+    "milestone-number": {
+      "prompt": "Bold, celebratory design focusing on the age number with decorative embellishments",
+      "enhancers": ["large number focus", "decorative flourishes", "celebratory elements"],
+      "colorBias": "depends on milestone - golds for 50th, silvers for 25th"
+    },
+    "floral-wreath": {
+      "prompt": "Beautiful botanical design with flower wreaths, greenery, and natural elegance",
+      "enhancers": ["flower arrangements", "botanical elements", "natural beauty", "wreath frame"],
+      "colorBias": "soft pastels, garden colors, greenery"
+    },
+    "minimalist-modern": {
+      "prompt": "Clean, contemporary design with simple geometric shapes and subtle celebration elements",
+      "enhancers": ["clean lines", "geometric shapes", "negative space", "modern typography area"],
+      "colorBias": "limited palette, one to three colors"
+    },
+    "vintage-banner": {
+      "prompt": "Retro-inspired design with vintage banners, classic typography spaces, and nostalgic charm",
+      "enhancers": ["vintage textures", "ribbon banners", "retro patterns", "classic feel"],
+      "colorBias": "muted vintage tones, sepia accents"
+    },
+    "nature-garden": {
+      "prompt": "Outdoor-inspired design with garden flowers, butterflies, and natural sunlit atmosphere",
+      "enhancers": ["garden flowers", "butterflies", "natural light", "outdoor freshness"],
+      "colorBias": "fresh greens, sunny yellows, flower colors"
+    }
+  }
+}
