@@ -30,8 +30,8 @@ const BusinessCardMaker = () => {
   });
 
   const [design, setDesign] = useState({
-    backgroundColor: '#ffffff',
-    textColor: '#1e293b',
+    backgroundColor: '#1a2744',
+    textColor: '#f8fafc',
     backgroundImage: null as string | null,
     template: 'modern'
   });
@@ -114,10 +114,8 @@ const BusinessCardMaker = () => {
 
     const drawTemplateIndicators = () => {
       // NO INDICATORS AT ALL for clean AI templates
-      // The template will be completely clean with no visual markers
     };
 
-    // Draw background
     if (design.backgroundImage) {
       const img = document.createElement('img');
       img.onload = () => {
@@ -138,7 +136,7 @@ const BusinessCardMaker = () => {
       link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
     }
-  }, [design.backgroundColor, design.backgroundImage, design.template, templates]);
+  }, [design.backgroundColor, design.backgroundImage, design.template]);
 
   const downloadFinalCard = useCallback(() => {
     if (cardRef.current) {
@@ -155,7 +153,7 @@ const BusinessCardMaker = () => {
         Object.entries(cardData).forEach(([field, text]) => {
           if (template[field] && text) {
             const pos = template[field];
-            ctx.font = `${pos.weight} ${pos.size}px Arial`;
+            ctx.font = `${pos.weight} ${pos.size}px Inter, Arial`;
             ctx.fillStyle = design.textColor;
             
             if (pos.align === 'center') {
@@ -172,7 +170,6 @@ const BusinessCardMaker = () => {
         });
       };
 
-      // Draw background
       if (design.backgroundImage) {
         const img = document.createElement('img');
         img.onload = () => {
@@ -206,8 +203,8 @@ const BusinessCardMaker = () => {
       website: 'www.designstudio.com'
     });
     setDesign({
-      backgroundColor: '#ffffff',
-      textColor: '#1e293b',
+      backgroundColor: '#1a2744',
+      textColor: '#f8fafc',
       backgroundImage: null,
       template: 'modern'
     });
@@ -216,22 +213,29 @@ const BusinessCardMaker = () => {
   const currentTemplate = templates[design.template];
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="min-h-screen relative overflow-hidden noise-overlay">
+      {/* Animated Background Orbs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="bg-orb bg-orb-1" />
+        <div className="bg-orb bg-orb-2" />
+        <div className="bg-orb bg-orb-3" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
-        <div className="bg-card rounded-xl shadow-card p-8 mb-8">
-          <div className="flex items-start justify-between">
+        <div className="glass-card rounded-2xl p-8 mb-8 animate-fade-in">
+          <div className="flex items-start justify-between flex-wrap gap-4">
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-3">
+              <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-3">
                 AI Business Card Studio
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl">
                 Design professional business cards with AI-powered styling. Create templates, enhance with AI, and export perfect cards.
               </p>
             </div>
-            <div className="flex items-center gap-2 text-accent-foreground bg-accent px-4 py-2 rounded-lg">
-              <Sparkles size={20} />
-              <span className="font-medium">AI Ready</span>
+            <div className="flex items-center gap-2 glass-button px-4 py-2.5 rounded-xl">
+              <Sparkles size={20} className="text-primary" />
+              <span className="font-medium text-foreground">AI Ready</span>
             </div>
           </div>
           
@@ -239,10 +243,10 @@ const BusinessCardMaker = () => {
           <div className="flex flex-wrap gap-3 mt-8">
             <button
               onClick={() => setShowIndicators(!showIndicators)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-all duration-300 ${
                 showIndicators 
-                  ? 'bg-template-indicator text-white hover:opacity-90' 
-                  : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                  ? 'bg-primary text-primary-foreground glow-primary' 
+                  : 'glass-button text-foreground'
               }`}
             >
               {showIndicators ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -251,7 +255,7 @@ const BusinessCardMaker = () => {
             
             <button
               onClick={downloadTemplate}
-              className="flex items-center gap-2 bg-info text-info-foreground px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity shadow-md"
+              className="flex items-center gap-2 bg-info/90 hover:bg-info text-info-foreground px-5 py-2.5 rounded-xl font-medium transition-all duration-300 hover:shadow-glow"
             >
               <Download size={18} />
               Download AI Template
@@ -259,7 +263,7 @@ const BusinessCardMaker = () => {
             
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex items-center gap-2 bg-success text-success-foreground px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity shadow-md"
+              className="flex items-center gap-2 bg-success/90 hover:bg-success text-success-foreground px-5 py-2.5 rounded-xl font-medium transition-all duration-300"
             >
               <Upload size={18} />
               Upload AI-Styled Card
@@ -267,7 +271,7 @@ const BusinessCardMaker = () => {
             
             <button
               onClick={downloadFinalCard}
-              className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity shadow-md"
+              className="flex items-center gap-2 bg-accent/90 hover:bg-accent text-accent-foreground px-5 py-2.5 rounded-xl font-medium transition-all duration-300 hover:shadow-glow-accent"
             >
               <Save size={18} />
               Export Final Card
@@ -275,7 +279,7 @@ const BusinessCardMaker = () => {
             
             <button
               onClick={resetToDefault}
-              className="flex items-center gap-2 bg-muted text-muted-foreground px-4 py-2 rounded-lg font-medium hover:bg-muted/80 transition-colors"
+              className="flex items-center gap-2 glass-button text-muted-foreground hover:text-foreground px-5 py-2.5 rounded-xl font-medium"
             >
               <RotateCcw size={18} />
               Reset
@@ -293,20 +297,20 @@ const BusinessCardMaker = () => {
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
           {/* Business Card Preview */}
-          <div className="xl:col-span-2">
-            <div className="bg-card rounded-xl shadow-card p-8">
-              <h2 className="text-xl font-semibold mb-6 flex items-center gap-3">
+          <div className="xl:col-span-2 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <div className="glass-card rounded-2xl p-8">
+              <h2 className="text-xl font-semibold mb-6 flex items-center gap-3 text-foreground">
                 <Palette size={20} className="text-primary" />
                 Card Preview
-                <span className="text-sm text-muted-foreground font-normal">
-                  ({design.template} template)
+                <span className="text-sm text-muted-foreground font-normal glass-button px-3 py-1 rounded-lg">
+                  {design.template}
                 </span>
               </h2>
               
               <div className="flex justify-center">
                 <div
                   ref={cardRef}
-                  className="relative rounded-xl overflow-hidden shadow-elevated"
+                  className="relative rounded-2xl overflow-hidden shadow-elevated transition-all duration-300 hover:shadow-glow"
                   style={{
                     width: '400px',
                     height: '240px',
@@ -314,7 +318,7 @@ const BusinessCardMaker = () => {
                     backgroundImage: design.backgroundImage ? `url(${design.backgroundImage})` : 'none',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    border: '2px solid hsl(var(--border))'
+                    border: '1px solid hsl(210 40% 98% / 0.1)'
                   }}
                 >
                   {/* Template Indicators */}
@@ -339,34 +343,26 @@ const BusinessCardMaker = () => {
                           <div key={`indicator-${field}`}>
                             {/* Subtle field outline */}
                             <div
-                              className="absolute border border-gray-300/30 rounded bg-gray-100/10"
+                              className="absolute rounded"
                               style={{
                                 left: `${rectX}px`,
                                 top: `${rectY}px`,
                                 width: `${width + 8}px`,
-                                height: `${height + 6}px`
+                                height: `${height + 6}px`,
+                                border: '1px solid hsl(191 91% 61% / 0.3)',
+                                background: 'hsl(191 91% 61% / 0.05)'
                               }}
                             />
-                            {/* Field label outside the card area */}
+                            {/* Corner dots */}
                             <div
-                              className="absolute text-xs font-medium text-gray-500 bg-white/90 px-2 py-1 rounded shadow-sm border"
-                              style={{
-                                left: `${rectX}px`,
-                                top: `${rectY - 24}px`
-                              }}
-                            >
-                              {field}
-                            </div>
-                            {/* Minimal corner dots */}
-                            <div
-                              className="absolute w-1.5 h-1.5 bg-blue-400/60 rounded-full"
+                              className="absolute w-1.5 h-1.5 rounded-full bg-primary/60"
                               style={{
                                 left: `${rectX - 1}px`,
                                 top: `${rectY - 1}px`
                               }}
                             />
                             <div
-                              className="absolute w-1.5 h-1.5 bg-blue-400/60 rounded-full"
+                              className="absolute w-1.5 h-1.5 rounded-full bg-primary/60"
                               style={{
                                 left: `${rectX + width + 7}px`,
                                 top: `${rectY - 1}px`
@@ -389,8 +385,10 @@ const BusinessCardMaker = () => {
                     return (
                       <div
                         key={field}
-                        className={`absolute cursor-pointer hover:bg-primary/10 transition-all duration-200 rounded px-1 ${
-                          activeField === field ? 'ring-2 ring-primary bg-primary/5' : ''
+                        className={`absolute cursor-pointer transition-all duration-200 rounded px-1 ${
+                          activeField === field 
+                            ? 'ring-2 ring-primary bg-primary/10' 
+                            : 'hover:bg-primary/5'
                         }`}
                         style={{
                           left: `${pos.x}px`,
@@ -418,8 +416,8 @@ const BusinessCardMaker = () => {
           {/* Controls Panel */}
           <div className="space-y-6">
             {/* Template Selection */}
-            <div className="bg-card rounded-xl shadow-card p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <div className="glass-card rounded-2xl p-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-foreground">
                 <Type size={18} className="text-primary" />
                 Template Style
               </h3>
@@ -429,10 +427,10 @@ const BusinessCardMaker = () => {
                   <button
                     key={template}
                     onClick={() => setDesign(prev => ({ ...prev, template }))}
-                    className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 ${
+                    className={`w-full text-left p-4 rounded-xl transition-all duration-300 ${
                       design.template === template
-                        ? 'border-primary bg-gradient-hover shadow-template'
-                        : 'border-border hover:border-primary/30 hover:bg-gradient-hover'
+                        ? 'bg-primary/20 border border-primary/50 shadow-template'
+                        : 'glass-button border border-transparent hover:border-primary/30'
                     }`}
                   >
                     <div className="font-semibold capitalize text-foreground">{template}</div>
@@ -448,8 +446,8 @@ const BusinessCardMaker = () => {
             </div>
 
             {/* Text Content */}
-            <div className="bg-card rounded-xl shadow-card p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <div className="glass-card rounded-2xl p-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-foreground">
                 <Type size={18} className="text-primary" />
                 Card Content
               </h3>
@@ -464,8 +462,8 @@ const BusinessCardMaker = () => {
                       type="text"
                       value={value}
                       onChange={(e) => handleTextChange(field, e.target.value)}
-                      className={`w-full p-3 border-2 rounded-lg bg-background text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary focus:border-primary transition-all ${
-                        activeField === field ? 'ring-2 ring-primary border-primary' : 'border-input'
+                      className={`w-full p-3 rounded-xl glass-input text-foreground placeholder-muted-foreground ${
+                        activeField === field ? 'ring-2 ring-primary border-primary/50' : ''
                       }`}
                       placeholder={`Enter ${field}`}
                     />
@@ -475,8 +473,8 @@ const BusinessCardMaker = () => {
             </div>
 
             {/* Design Controls */}
-            <div className="bg-card rounded-xl shadow-card p-6">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <div className="glass-card rounded-2xl p-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-foreground">
                 <Image size={18} className="text-primary" />
                 Design Settings
               </h3>
@@ -486,12 +484,14 @@ const BusinessCardMaker = () => {
                   <label className="block text-sm font-medium text-foreground mb-2">
                     Background Color
                   </label>
-                  <input
-                    type="color"
-                    value={design.backgroundColor}
-                    onChange={(e) => handleColorChange('backgroundColor', e.target.value)}
-                    className="w-full h-12 border-2 border-input rounded-lg cursor-pointer"
-                  />
+                  <div className="relative">
+                    <input
+                      type="color"
+                      value={design.backgroundColor}
+                      onChange={(e) => handleColorChange('backgroundColor', e.target.value)}
+                      className="w-full h-12 rounded-xl cursor-pointer glass-input"
+                    />
+                  </div>
                 </div>
                 
                 <div>
@@ -502,7 +502,7 @@ const BusinessCardMaker = () => {
                     type="color"
                     value={design.textColor}
                     onChange={(e) => handleColorChange('textColor', e.target.value)}
-                    className="w-full h-12 border-2 border-input rounded-lg cursor-pointer"
+                    className="w-full h-12 rounded-xl cursor-pointer glass-input"
                   />
                 </div>
 
@@ -511,7 +511,7 @@ const BusinessCardMaker = () => {
                     <label className="block text-sm font-medium text-foreground mb-2">
                       Background Image
                     </label>
-                    <div className="w-full h-20 bg-muted rounded-lg border-2 border-input overflow-hidden">
+                    <div className="w-full h-20 rounded-xl overflow-hidden glass-input">
                       <img
                         src={design.backgroundImage}
                         alt="Background"
@@ -532,15 +532,15 @@ const BusinessCardMaker = () => {
         </div>
 
         {/* AI Workflow Instructions */}
-        <div className="mt-8 bg-gradient-card border-2 border-accent rounded-xl p-8">
+        <div className="mt-8 glass-card rounded-2xl p-8 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <div className="flex items-start gap-4">
-            <div className="bg-accent rounded-lg p-2">
-              <Info size={24} className="text-accent-foreground" />
+            <div className="glass-button rounded-xl p-3">
+              <Info size={24} className="text-primary" />
             </div>
             <div className="flex-1">
               <h3 className="text-xl font-semibold text-foreground mb-4">AI-Enhanced Design Workflow</h3>
               <div className="grid md:grid-cols-2 gap-6 text-muted-foreground">
-                <div>
+                <div className="glass-button rounded-xl p-4">
                   <h4 className="font-semibold text-foreground mb-2">Step 1: Create Template</h4>
                   <ul className="space-y-1 text-sm">
                     <li>• Design your layout and add content</li>
@@ -548,7 +548,7 @@ const BusinessCardMaker = () => {
                     <li>• Download the AI template with visual indicators</li>
                   </ul>
                 </div>
-                <div>
+                <div className="glass-button rounded-xl p-4">
                   <h4 className="font-semibold text-foreground mb-2">Step 2: AI Enhancement</h4>
                   <ul className="space-y-1 text-sm">
                     <li>• Upload template to AI (Midjourney, DALL-E, etc.)</li>
@@ -556,7 +556,7 @@ const BusinessCardMaker = () => {
                     <li>• Keep the field guides intact during generation</li>
                   </ul>
                 </div>
-                <div>
+                <div className="glass-button rounded-xl p-4">
                   <h4 className="font-semibold text-foreground mb-2">Step 3: Import & Finalize</h4>
                   <ul className="space-y-1 text-sm">
                     <li>• Upload your AI-enhanced background</li>
@@ -564,7 +564,7 @@ const BusinessCardMaker = () => {
                     <li>• Export your professional business card</li>
                   </ul>
                 </div>
-                <div>
+                <div className="glass-button rounded-xl p-4">
                   <h4 className="font-semibold text-foreground mb-2">Pro Tips</h4>
                   <ul className="space-y-1 text-sm">
                     <li>• Field guides ensure perfect text alignment</li>
