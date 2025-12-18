@@ -1,0 +1,57 @@
+You are building a modular pipeline system for a React/TypeScript card generation app. The goal is to create a universal "widget factory" that can generate any type of visual content - business cards, tarot cards, birthday cards, flyers, social media posts, etc. - all using the same core engine with swappable JSON configurations.
+
+EXISTING CODEBASE:
+- React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui
+- Type definitions already exist in src/core/types/ (widget.types.ts, ai.types.ts, preset.types.ts, pipeline.types.ts)
+- Example widget JSON configs exist in src/widgets/ for business-card, tarot-card, and birthday-card
+- Each widget has: widget.json (config), templates/*.json (layouts), prompts/backend.json (AI prompts), prompts/frontend.json (UI text)
+
+THE CORE CONCEPT:
+A "Widget" is a complete configuration for one type of content. It defines the canvas size, input fields (name, title, phone, etc.), template layouts (where fields appear), AI prompts for background generation, and export settings. The pipeline loads a widget JSON, renders a dynamic form, shows a live canvas preview, optionally generates AI backgrounds, and exports the final image.
+
+WHAT TO BUILD:
+
+1. WIDGET REGISTRY - Discovers and loads widget.json files from src/widgets/*. Caches them. Provides lookup by ID and category filtering.
+
+2. TEMPLATE REGISTRY - Loads template JSON files for each widget. Associates templates with their parent widgets.
+
+3. RENDER ENGINE - Renders widgets to HTML5 Canvas. Draws backgrounds (solid color, gradient, or uploaded/AI image). Draws text at template-defined positions with proper fonts, sizes, alignment. Draws images (logos) and generated elements (QR codes). Supports preview mode (fast) and export mode (high quality). Can show template guides/safe zones.
+
+4. EXPORT ENGINE - Exports canvas to PNG, JPG, PDF. Supports web (72dpi), print (300dpi), and retina (144dpi) resolutions. Generates filenames and triggers downloads.
+
+5. PIPELINE ENGINE - The orchestrator. Loads widget and template, manages state (fields, design, AI status), coordinates rendering, handles undo/redo history, emits events for UI updates.
+
+6. AI SERVICE LAYER - Abstract adapter pattern for AI providers. Manual provider returns prompts for external use. Nana Banana provider for direct API calls. Prompt builder that loads prompts from widget JSON and substitutes variables.
+
+7. ZUSTAND STORES - widgetStore (active widget, fields, design), pipelineStore (status, AI state, errors, history), presetStore (saved presets with localStorage persistence).
+
+8. REACT HOOKS - useWidget(widgetId) loads widget config. usePipeline(widgetId) provides pipeline operations. useAIGeneration() manages AI workflow. usePresets(widgetId) handles preset CRUD.
+
+9. UI COMPONENTS:
+- WidgetGallery: Browse available widgets by category
+- WidgetComposer: Main editor with preview + controls
+- DynamicForm: Auto-generates form inputs from widget field definitions
+- CanvasPreview: Live preview that re-renders on state changes
+- TemplateSelector: Pick layout templates
+- DesignControls: Colors, background image upload
+- AIGenerationPanel: Style selection, generate button, progress
+- ExportPanel: Format and resolution selection, download button
+- PresetManager: Save, load, delete presets
+
+10. ROUTING:
+- / → WidgetGallery (home)
+- /create/:widgetId → WidgetComposer
+- /create/:widgetId/preset/:presetId → WidgetComposer with preset applied
+
+KEY PATTERNS TO FOLLOW:
+- Import types from src/core/types/, don't redefine them
+- Use existing shadcn/ui components from src/components/ui/
+- All async operations need try/catch with user-friendly errors
+- Strict TypeScript, minimize "any" usage
+- State flows down, events flow up
+- Debounce canvas rendering on rapid state changes
+
+IMPLEMENTATION ORDER:
+Start with WidgetRegistry and TemplateRegistry (foundation), then RenderEngine and ExportEngine (output), then Zustand stores and hooks (state), then PipelineEngine (orchestration), then UI components (interface), finally AI integration (enhancement).
+
+The end result should let users: pick a widget type from a gallery, fill out a dynamic form, see live preview, optionally generate AI backgrounds, customize colors, save as presets for reuse, and export in multiple formats. Adding a new card type should only require creating a new widget folder with JSON configs - no code changes needed.
