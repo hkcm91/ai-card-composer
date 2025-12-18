@@ -1,0 +1,214 @@
+{
+  "$schema": "../../core/schemas/widget.schema.json",
+  "version": "1.0.0",
+  "metadata": {
+    "id": "tarot-card",
+    "name": "Tarot Card",
+    "description": "Mystical tarot cards with AI-generated artwork. Create custom oracle decks, divination cards, or artistic interpretations.",
+    "category": "creative",
+    "tags": ["mystical", "spiritual", "oracle", "divination", "art", "deck"],
+    "icon": "moon",
+    "thumbnail": "./assets/thumbnail.png"
+  },
+
+  "canvas": {
+    "width": 750,
+    "height": 1275,
+    "unit": "px",
+    "aspectRatio": "1:1.7",
+    "previewScale": 0.28,
+    "bleed": {
+      "enabled": true,
+      "size": 12
+    },
+    "safeZone": {
+      "enabled": true,
+      "margin": 40
+    },
+    "printSize": {
+      "width": 2.75,
+      "height": 4.75,
+      "unit": "in"
+    }
+  },
+
+  "fields": [
+    {
+      "id": "cardName",
+      "type": "text",
+      "label": "Card Name",
+      "placeholder": "The Fool",
+      "required": true,
+      "maxLength": 30,
+      "style": {
+        "fontFamily": "Playfair Display",
+        "fontSize": { "min": 24, "max": 48, "default": 36 },
+        "fontWeight": ["normal", "bold"],
+        "defaultWeight": "bold",
+        "textTransform": "uppercase"
+      }
+    },
+    {
+      "id": "cardNumber",
+      "type": "select",
+      "label": "Card Number",
+      "required": false,
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "0", "label": "0 - The Fool" },
+        { "value": "I", "label": "I - The Magician" },
+        { "value": "II", "label": "II - The High Priestess" },
+        { "value": "III", "label": "III - The Empress" },
+        { "value": "IV", "label": "IV - The Emperor" },
+        { "value": "V", "label": "V - The Hierophant" },
+        { "value": "VI", "label": "VI - The Lovers" },
+        { "value": "VII", "label": "VII - The Chariot" },
+        { "value": "VIII", "label": "VIII - Strength" },
+        { "value": "IX", "label": "IX - The Hermit" },
+        { "value": "X", "label": "X - Wheel of Fortune" },
+        { "value": "XI", "label": "XI - Justice" },
+        { "value": "XII", "label": "XII - The Hanged Man" },
+        { "value": "XIII", "label": "XIII - Death" },
+        { "value": "XIV", "label": "XIV - Temperance" },
+        { "value": "XV", "label": "XV - The Devil" },
+        { "value": "XVI", "label": "XVI - The Tower" },
+        { "value": "XVII", "label": "XVII - The Star" },
+        { "value": "XVIII", "label": "XVIII - The Moon" },
+        { "value": "XIX", "label": "XIX - The Sun" },
+        { "value": "XX", "label": "XX - Judgement" },
+        { "value": "XXI", "label": "XXI - The World" }
+      ]
+    },
+    {
+      "id": "arcana",
+      "type": "select",
+      "label": "Arcana Type",
+      "required": true,
+      "defaultValue": "major",
+      "options": [
+        { "value": "major", "label": "Major Arcana" },
+        { "value": "wands", "label": "Minor - Wands" },
+        { "value": "cups", "label": "Minor - Cups" },
+        { "value": "swords", "label": "Minor - Swords" },
+        { "value": "pentacles", "label": "Minor - Pentacles" }
+      ]
+    },
+    {
+      "id": "suit",
+      "type": "select",
+      "label": "Card Value",
+      "required": false,
+      "options": [
+        { "value": "", "label": "Not Applicable" },
+        { "value": "ace", "label": "Ace" },
+        { "value": "two", "label": "Two" },
+        { "value": "three", "label": "Three" },
+        { "value": "four", "label": "Four" },
+        { "value": "five", "label": "Five" },
+        { "value": "six", "label": "Six" },
+        { "value": "seven", "label": "Seven" },
+        { "value": "eight", "label": "Eight" },
+        { "value": "nine", "label": "Nine" },
+        { "value": "ten", "label": "Ten" },
+        { "value": "page", "label": "Page" },
+        { "value": "knight", "label": "Knight" },
+        { "value": "queen", "label": "Queen" },
+        { "value": "king", "label": "King" }
+      ],
+      "conditional": {
+        "dependsOn": "arcana",
+        "condition": "notEquals",
+        "value": "major"
+      }
+    },
+    {
+      "id": "meaning",
+      "type": "textarea",
+      "label": "Upright Meaning",
+      "placeholder": "New beginnings, innocence, spontaneity, a free spirit...",
+      "required": false,
+      "maxLength": 200
+    },
+    {
+      "id": "reversed",
+      "type": "textarea",
+      "label": "Reversed Meaning",
+      "placeholder": "Recklessness, risk-taking, holding back...",
+      "required": false,
+      "maxLength": 200
+    },
+    {
+      "id": "keywords",
+      "type": "text",
+      "label": "Keywords",
+      "placeholder": "beginnings, innocence, adventure",
+      "required": false,
+      "maxLength": 100
+    },
+    {
+      "id": "element",
+      "type": "select",
+      "label": "Element",
+      "required": false,
+      "options": [
+        { "value": "", "label": "None" },
+        { "value": "fire", "label": "Fire" },
+        { "value": "water", "label": "Water" },
+        { "value": "air", "label": "Air" },
+        { "value": "earth", "label": "Earth" },
+        { "value": "spirit", "label": "Spirit/Aether" }
+      ]
+    },
+    {
+      "id": "customArtwork",
+      "type": "image",
+      "label": "Custom Artwork",
+      "required": false,
+      "maxSize": "5MB",
+      "acceptedFormats": ["png", "jpg", "webp"],
+      "dimensions": {
+        "maxWidth": 1500,
+        "maxHeight": 2550
+      }
+    }
+  ],
+
+  "templates": {
+    "default": "rider-waite",
+    "available": ["rider-waite", "art-nouveau", "minimalist", "dark-gothic", "cosmic", "botanical"]
+  },
+
+  "prompts": {
+    "backend": "./prompts/backend.json",
+    "frontend": "./prompts/frontend.json"
+  },
+
+  "assets": {
+    "fonts": ["Playfair Display", "Cinzel", "EB Garamond", "Crimson Text"],
+    "icons": "./assets/icons/",
+    "reference": "./assets/reference/",
+    "textures": "./assets/textures/"
+  },
+
+  "export": {
+    "formats": ["png", "pdf", "jpg"],
+    "defaultFormat": "png",
+    "resolutions": {
+      "web": { "dpi": 72, "scale": 1 },
+      "print": { "dpi": 300, "scale": 4.17 },
+      "retina": { "dpi": 144, "scale": 2 }
+    }
+  },
+
+  "aiWorkflow": {
+    "enabled": true,
+    "provider": "auto",
+    "features": {
+      "backgroundGeneration": true,
+      "styleTransfer": true,
+      "colorHarmonization": true,
+      "textEnhancement": false,
+      "autoComposition": true
+    }
+  }
+}

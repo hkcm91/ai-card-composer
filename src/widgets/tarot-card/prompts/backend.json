@@ -1,0 +1,159 @@
+{
+  "version": "1.0.0",
+  "provider": "universal",
+
+  "systemPrompt": {
+    "role": "You are a master illustrator specializing in mystical and esoteric art, with expertise in tarot card design spanning multiple traditions from Rider-Waite to modern interpretations.",
+    "context": "Generate evocative, symbolic artwork for tarot cards that captures the essence and meaning of each card while maintaining artistic cohesion for a complete deck.",
+    "constraints": [
+      "Maintain a clear central illustration area (middle 60% of the card)",
+      "Reserve top 15% for card name/number placement",
+      "Reserve bottom 15% for meaning text placement",
+      "Include appropriate symbolism for the card's meaning",
+      "Maintain consistent artistic style throughout the deck",
+      "Avoid modern/anachronistic elements unless specifically requested",
+      "Create vertically-oriented compositions that work both upright and reversed"
+    ]
+  },
+
+  "templates": {
+    "backgroundGeneration": {
+      "base": "Create a mystical tarot card illustration for '{cardName}' ({cardNumber}). The card represents: {meaning}. Style: {style}. Dimensions: {width}x{height} pixels, vertical orientation.",
+      "variables": {
+        "style": [
+          "classic Rider-Waite inspired",
+          "Art Nouveau ornamental",
+          "dark gothic",
+          "celestial cosmic",
+          "botanical natural",
+          "minimalist modern",
+          "medieval woodcut",
+          "watercolor ethereal",
+          "psychedelic visionary"
+        ],
+        "mood": [
+          "mystical",
+          "contemplative",
+          "transformative",
+          "powerful",
+          "serene",
+          "ominous",
+          "enlightening",
+          "mysterious",
+          "hopeful"
+        ],
+        "symbolism": [
+          "celestial bodies",
+          "natural elements",
+          "archetypal figures",
+          "sacred geometry",
+          "alchemical symbols",
+          "flora and fauna",
+          "mythological creatures"
+        ]
+      },
+      "modifiers": {
+        "textSafeZones": "Leave clear space at top ({topZone}px) and bottom ({bottomZone}px) for text overlay. The central illustration should be contained within the middle area.",
+        "colorHarmony": "Use a color palette centered on {primaryColor} with {mood} undertones. Accent with {accentColor}.",
+        "elementAlignment": "Incorporate {element} elemental symbolism: {elementSymbols}",
+        "arcanaStyle": "This is a {arcana} card. {arcanaGuidance}"
+      }
+    },
+
+    "styleTransfer": {
+      "base": "Apply the artistic style of the reference image to create a new tarot card illustration for '{cardName}'. Maintain the symbolic depth and mystical quality appropriate for divination cards.",
+      "referenceHandling": "Preserve the color palette, brushwork/texture, and overall artistic approach while creating original symbolic imagery specific to this card's meaning."
+    },
+
+    "compositing": {
+      "nanaBanana": {
+        "prompt": "Composite these elements into a cohesive tarot card design with mystical depth and symbolic resonance.",
+        "layers": [
+          { "type": "background", "source": "{backgroundTexture}", "blendMode": "normal" },
+          { "type": "subject", "source": "{centralFigure}", "blendMode": "normal" },
+          { "type": "overlay", "source": "{symbolOverlay}", "blendMode": "multiply", "opacity": 0.7 },
+          { "type": "accent", "source": "{borderElements}", "blendMode": "screen", "opacity": 0.8 },
+          { "type": "decoration", "source": "{mysticalEffects}", "blendMode": "overlay", "opacity": 0.5 }
+        ]
+      }
+    }
+  },
+
+  "qualityEnhancers": [
+    "highly detailed illustration",
+    "rich symbolic imagery",
+    "mystical atmosphere",
+    "balanced composition",
+    "cohesive color palette",
+    "print-ready quality",
+    "intricate details",
+    "professional card game art quality"
+  ],
+
+  "negativePrompts": [
+    "text",
+    "letters",
+    "words",
+    "modern technology",
+    "cars",
+    "phones",
+    "computers",
+    "blurry",
+    "low quality",
+    "amateur",
+    "childish",
+    "cartoon style unless requested",
+    "photorealistic faces",
+    "stock photo",
+    "watermark"
+  ],
+
+  "arcanaGuidance": {
+    "major": "Major Arcana cards represent significant life lessons, karmic influences, and archetypal energies. The imagery should feel profound and transformative.",
+    "wands": "Wands represent fire energy - creativity, passion, inspiration, and willpower. Include flame motifs, wooden staffs, or growth imagery.",
+    "cups": "Cups represent water energy - emotions, relationships, intuition, and the subconscious. Include chalices, water, and flowing forms.",
+    "swords": "Swords represent air energy - intellect, communication, conflict, and truth. Include blades, clouds, or cutting imagery.",
+    "pentacles": "Pentacles represent earth energy - material world, finances, career, and physical health. Include coins, plants, or grounded imagery."
+  },
+
+  "elementSymbols": {
+    "fire": "flames, suns, salamanders, red/orange tones, upward triangles",
+    "water": "waves, moons, fish, blue/silver tones, downward triangles",
+    "air": "clouds, birds, feathers, yellow/white tones, upward triangle with line",
+    "earth": "mountains, trees, crystals, green/brown tones, downward triangle with line",
+    "spirit": "stars, ethereal light, infinity symbols, purple/white tones, circles"
+  },
+
+  "stylePresets": {
+    "rider-waite": {
+      "prompt": "Classic tarot illustration in the style of Pamela Colman Smith, with clear symbolic imagery, flat perspective, and traditional color palette",
+      "enhancers": ["traditional symbolism", "clear line work", "golden yellow backgrounds"],
+      "colorBias": "golden yellows, sky blues, earthy tones"
+    },
+    "art-nouveau": {
+      "prompt": "Ornate Art Nouveau style with flowing organic lines, decorative borders, and elegant figures in the style of Alphonse Mucha",
+      "enhancers": ["decorative borders", "flowing hair and fabric", "organic patterns", "elegant typography spaces"],
+      "colorBias": "muted golds, sage greens, dusty roses"
+    },
+    "dark-gothic": {
+      "prompt": "Dark gothic aesthetic with dramatic shadows, ornate Victorian elements, and mysterious atmosphere",
+      "enhancers": ["dramatic lighting", "intricate details", "gothic architecture elements", "moonlit scenes"],
+      "colorBias": "deep purples, blacks, blood reds, silver accents"
+    },
+    "cosmic": {
+      "prompt": "Celestial cosmic design with stars, nebulae, and cosmic phenomena creating mystical imagery",
+      "enhancers": ["starfields", "galaxy swirls", "cosmic energy", "ethereal glow"],
+      "colorBias": "deep space blues, purples, cosmic pinks, starlight whites"
+    },
+    "minimalist": {
+      "prompt": "Clean minimalist design with essential symbolic elements, geometric shapes, and restrained color palette",
+      "enhancers": ["negative space", "essential symbols only", "clean lines", "modern aesthetic"],
+      "colorBias": "limited palette, two to three colors maximum"
+    },
+    "botanical": {
+      "prompt": "Nature-inspired botanical illustration with detailed flora, fauna, and natural symbolism",
+      "enhancers": ["detailed plants", "natural textures", "wildlife", "organic compositions"],
+      "colorBias": "forest greens, earth browns, flower colors"
+    }
+  }
+}

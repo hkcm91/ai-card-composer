@@ -1,0 +1,165 @@
+{
+  "version": "1.0.0",
+
+  "ui": {
+    "workflow": {
+      "title": "AI-Enhanced Business Card Creator",
+      "description": "Create stunning professional business cards with AI-powered background generation",
+      "steps": [
+        {
+          "id": 1,
+          "title": "Choose Template",
+          "description": "Select a layout that matches your professional style",
+          "icon": "layout"
+        },
+        {
+          "id": 2,
+          "title": "Enter Information",
+          "description": "Fill in your name, title, company, and contact details",
+          "icon": "edit"
+        },
+        {
+          "id": 3,
+          "title": "Customize Design",
+          "description": "Choose colors and upload your logo",
+          "icon": "palette"
+        },
+        {
+          "id": 4,
+          "title": "Generate Background",
+          "description": "Use AI to create a unique, professional background",
+          "icon": "sparkles"
+        },
+        {
+          "id": 5,
+          "title": "Export",
+          "description": "Download your finished business card in print-ready format",
+          "icon": "download"
+        }
+      ]
+    },
+
+    "tooltips": {
+      "aiGenerate": "Click to generate an AI background based on your template and color choices. The AI will create a unique design that complements your text.",
+      "templateGuides": "Toggle field guides to see where your text will be placed. Use this when uploading or generating backgrounds to ensure text readability.",
+      "safeZone": "The safe zone ensures important content won't be cut off when printing. Keep text and logos within this area.",
+      "bleed": "Bleed area extends beyond the card edge to prevent white borders when trimmed. Background images should extend into this area.",
+      "colorScheme": "Choose a pre-designed color combination or create your own. The AI will use these colors as guidance for background generation.",
+      "printResolution": "Print resolution (300 DPI) creates larger files but ensures crisp output on professional printers.",
+      "webResolution": "Web resolution (72 DPI) creates smaller files optimized for digital sharing and screen display."
+    },
+
+    "suggestions": {
+      "styles": [
+        {
+          "label": "Corporate",
+          "prompt": "clean professional gradient with subtle geometric patterns",
+          "thumbnail": "./assets/style-corporate.png"
+        },
+        {
+          "label": "Creative",
+          "prompt": "bold artistic background with dynamic color splashes",
+          "thumbnail": "./assets/style-creative.png"
+        },
+        {
+          "label": "Minimal",
+          "prompt": "simple elegant background with subtle texture",
+          "thumbnail": "./assets/style-minimal.png"
+        },
+        {
+          "label": "Luxury",
+          "prompt": "rich marble texture with gold accents",
+          "thumbnail": "./assets/style-luxury.png"
+        },
+        {
+          "label": "Tech",
+          "prompt": "modern digital aesthetic with circuit-inspired patterns",
+          "thumbnail": "./assets/style-tech.png"
+        },
+        {
+          "label": "Nature",
+          "prompt": "organic textures with earthy professional tones",
+          "thumbnail": "./assets/style-nature.png"
+        }
+      ]
+    },
+
+    "placeholders": {
+      "name": "Your Full Name",
+      "title": "Your Job Title",
+      "company": "Company Name",
+      "phone": "+1 (555) 123-4567",
+      "email": "you@company.com",
+      "website": "www.company.com"
+    },
+
+    "labels": {
+      "sections": {
+        "template": "Template",
+        "content": "Card Content",
+        "design": "Design",
+        "ai": "AI Generation",
+        "export": "Export"
+      },
+      "buttons": {
+        "generate": "Generate Background",
+        "regenerate": "Regenerate",
+        "export": "Download Card",
+        "exportPdf": "Download PDF",
+        "preview": "Preview",
+        "reset": "Reset"
+      }
+    }
+  },
+
+  "validation": {
+    "messages": {
+      "required": "{fieldLabel} is required for your business card",
+      "maxLength": "{fieldLabel} must be under {max} characters to fit properly",
+      "email": "Please enter a valid email address",
+      "phone": "Please enter a valid phone number",
+      "url": "Please enter a valid website URL",
+      "imageSize": "Image must be under {maxSize} for optimal performance",
+      "imageFormat": "Please upload an image in one of these formats: {formats}",
+      "imageDimensions": "For best results, logo should be under {maxWidth}x{maxHeight} pixels"
+    }
+  },
+
+  "help": {
+    "aiWorkflow": {
+      "title": "How AI Generation Works",
+      "content": "Our AI creates unique backgrounds tailored specifically for business cards. It analyzes your chosen template, color scheme, and style preferences to generate professional artwork. The AI automatically preserves clear areas for your text and ensures the design maintains professional standards suitable for print."
+    },
+    "printing": {
+      "title": "Printing Your Card",
+      "content": "For professional printing, export at 300 DPI (Print resolution). This creates a larger file but ensures crisp, high-quality output. Most print shops accept PNG or PDF format. The exported file includes proper bleed areas for edge-to-edge printing."
+    },
+    "templates": {
+      "title": "Choosing a Template",
+      "content": "Templates determine where your text and logo appear on the card. 'Modern' offers a clean left-aligned layout. 'Classic' provides a traditional centered design. 'Minimal' emphasizes whitespace. 'Executive' conveys authority. Choose based on your industry and personal brand."
+    },
+    "colors": {
+      "title": "Color Selection",
+      "content": "Choose colors that reflect your brand and ensure readability. Dark backgrounds work well with light text. For professional contexts, consider navy, charcoal, or deep green. Creative fields can use bolder colors. The AI will incorporate your color choices into generated backgrounds."
+    }
+  },
+
+  "errors": {
+    "generation": {
+      "failed": "Background generation failed. Please try again or choose a different style.",
+      "timeout": "Generation is taking longer than expected. Please wait or try again.",
+      "quotaExceeded": "You've reached your generation limit. Please upgrade or wait until tomorrow.",
+      "invalidPrompt": "The style description couldn't be processed. Please try a different description."
+    },
+    "export": {
+      "failed": "Export failed. Please try again.",
+      "browserUnsupported": "Your browser doesn't support this export format. Try PNG instead."
+    }
+  },
+
+  "confirmations": {
+    "reset": "Are you sure you want to reset? This will clear all your content and design changes.",
+    "regenerate": "Generate a new background? This will replace the current one.",
+    "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?"
+  }
+}

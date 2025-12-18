@@ -1,0 +1,164 @@
+{
+  "id": "modern",
+  "name": "Modern",
+  "description": "Clean, professional layout with left-aligned hierarchy. Perfect for tech and creative industries.",
+  "thumbnail": "./modern-thumb.png",
+
+  "layout": {
+    "type": "absolute",
+    "grid": {
+      "columns": 12,
+      "rows": 8,
+      "gap": 8
+    }
+  },
+
+  "fields": {
+    "name": {
+      "position": { "x": 40, "y": 60 },
+      "size": { "width": 280, "height": 36 },
+      "style": {
+        "fontSize": 28,
+        "fontWeight": "bold",
+        "fontFamily": "Inter",
+        "textAlign": "left",
+        "color": "inherit",
+        "lineHeight": 1.2
+      },
+      "animation": "fade-in-left"
+    },
+    "title": {
+      "position": { "x": 40, "y": 100 },
+      "size": { "width": 260, "height": 24 },
+      "style": {
+        "fontSize": 18,
+        "fontWeight": "normal",
+        "fontFamily": "Inter",
+        "textAlign": "left",
+        "color": "inherit",
+        "opacity": 0.9
+      },
+      "animation": "fade-in-left"
+    },
+    "company": {
+      "position": { "x": 40, "y": 130 },
+      "size": { "width": 240, "height": 20 },
+      "style": {
+        "fontSize": 14,
+        "fontWeight": "500",
+        "fontFamily": "Inter",
+        "textAlign": "left",
+        "textTransform": "uppercase",
+        "letterSpacing": "0.05em",
+        "opacity": 0.8
+      },
+      "animation": "fade-in-left"
+    },
+    "phone": {
+      "position": { "x": 40, "y": 180 },
+      "size": { "width": 160, "height": 18 },
+      "style": {
+        "fontSize": 12,
+        "fontWeight": "normal",
+        "textAlign": "left"
+      },
+      "icon": "phone"
+    },
+    "email": {
+      "position": { "x": 40, "y": 200 },
+      "size": { "width": 200, "height": 18 },
+      "style": {
+        "fontSize": 12,
+        "fontWeight": "normal",
+        "textAlign": "left"
+      },
+      "icon": "mail"
+    },
+    "website": {
+      "position": { "x": 40, "y": 220 },
+      "size": { "width": 180, "height": 18 },
+      "style": {
+        "fontSize": 12,
+        "fontWeight": "normal",
+        "textAlign": "left"
+      },
+      "icon": "globe"
+    },
+    "logo": {
+      "position": { "x": 320, "y": 40 },
+      "size": { "width": 60, "height": 60 },
+      "type": "image",
+      "objectFit": "contain"
+    },
+    "qrCode": {
+      "position": { "x": 310, "y": 150 },
+      "size": { "width": 80, "height": 80 },
+      "type": "generated"
+    }
+  },
+
+  "background": {
+    "default": {
+      "type": "solid",
+      "color": "#1a2744"
+    },
+    "aiSuggestions": [
+      "elegant dark gradient with subtle blue tones",
+      "modern geometric pattern with depth",
+      "professional abstract with soft light rays",
+      "minimalist texture with fine grain"
+    ]
+  },
+
+  "colorSchemes": [
+    {
+      "name": "Corporate Blue",
+      "background": "#1a2744",
+      "text": "#f8fafc",
+      "accent": "#3b82f6"
+    },
+    {
+      "name": "Elegant Dark",
+      "background": "#18181b",
+      "text": "#fafafa",
+      "accent": "#a855f7"
+    },
+    {
+      "name": "Forest Professional",
+      "background": "#1a2e1a",
+      "text": "#f0fdf4",
+      "accent": "#22c55e"
+    },
+    {
+      "name": "Warm Executive",
+      "background": "#292524",
+      "text": "#fafaf9",
+      "accent": "#f59e0b"
+    },
+    {
+      "name": "Ocean Calm",
+      "background": "#0c4a6e",
+      "text": "#f0f9ff",
+      "accent": "#0ea5e9"
+    },
+    {
+      "name": "Clean White",
+      "background": "#ffffff",
+      "text": "#1f2937",
+      "accent": "#6366f1"
+    }
+  ],
+
+  "decorations": [
+    {
+      "id": "accent-line",
+      "type": "line",
+      "position": { "x": 40, "y": 165 },
+      "size": { "width": 80, "height": 2 },
+      "style": {
+        "color": "accent",
+        "opacity": 0.6
+      }
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "$schema": "../../core/schemas/widget.schema.json",
+  "version": "1.0.0",
+  "metadata": {
+    "id": "birthday-card",
+    "name": "Birthday Card",
+    "description": "Personalized birthday greeting cards with custom messages and AI-generated festive designs",
+    "category": "celebration",
+    "tags": ["birthday", "celebration", "greeting", "party", "gift", "personal"],
+    "icon": "cake",
+    "thumbnail": "./assets/thumbnail.png"
+  },
+
+  "canvas": {
+    "width": 1400,
+    "height": 1000,
+    "unit": "px",
+    "aspectRatio": "1.4:1",
+    "previewScale": 0.32,
+    "bleed": {
+      "enabled": true,
+      "size": 12
+    },
+    "safeZone": {
+      "enabled": true,
+      "margin": 48
+    },
+    "foldable": true,
+    "foldType": "half-vertical",
+    "printSize": {
+      "width": 7,
+      "height": 5,
+      "unit": "in"
+    }
+  },
+
+  "fields": [
+    {
+      "id": "recipientName",
+      "type": "text",
+      "label": "Recipient's Name",
+      "placeholder": "Sarah",
+      "required": true,
+      "maxLength": 30,
+      "style": {
+        "fontFamily": "Playfair Display",
+        "fontSize": { "min": 36, "max": 72, "default": 48 },
+        "fontWeight": ["normal", "bold"],
+        "defaultWeight": "bold"
+      }
+    },
+    {
+      "id": "age",
+      "type": "number",
+      "label": "Age (optional)",
+      "placeholder": "30",
+      "required": false,
+      "min": 1,
+      "max": 150,
+      "style": {
+        "fontSize": { "min": 48, "max": 120, "default": 72 },
+        "fontWeight": ["bold"]
+      }
+    },
+    {
+      "id": "greeting",
+      "type": "select",
+      "label": "Greeting Style",
+      "required": true,
+      "defaultValue": "happy-birthday",
+      "options": [
+        { "value": "happy-birthday", "label": "Happy Birthday" },
+        { "value": "feliz-cumpleanos", "label": "Feliz Cumpleaños" },
+        { "value": "joyeux-anniversaire", "label": "Joyeux Anniversaire" },
+        { "value": "alles-gute", "label": "Alles Gute zum Geburtstag" },
+        { "value": "buon-compleanno", "label": "Buon Compleanno" },
+        { "value": "custom", "label": "Custom Greeting" }
+      ]
+    },
+    {
+      "id": "customGreeting",
+      "type": "text",
+      "label": "Custom Greeting Text",
+      "placeholder": "Warmest Wishes on Your Special Day",
+      "required": false,
+      "maxLength": 50,
+      "conditional": {
+        "dependsOn": "greeting",
+        "condition": "equals",
+        "value": "custom"
+      }
+    },
+    {
+      "id": "message",
+      "type": "textarea",
+      "label": "Personal Message",
+      "placeholder": "Wishing you all the happiness in the world on your special day! May this year bring you everything you've been dreaming of.",
+      "required": false,
+      "maxLength": 300
+    },
+    {
+      "id": "senderName",
+      "type": "text",
+      "label": "From",
+      "placeholder": "With love, [Your Name]",
+      "required": false,
+      "maxLength": 50
+    },
+    {
+      "id": "theme",
+      "type": "select",
+      "label": "Card Theme",
+      "required": true,
+      "defaultValue": "festive",
+      "options": [
+        { "value": "festive", "label": "Festive & Fun" },
+        { "value": "elegant", "label": "Elegant & Sophisticated" },
+        { "value": "kids", "label": "Kids & Playful" },
+        { "value": "milestone", "label": "Milestone Birthday" },
+        { "value": "floral", "label": "Floral & Beautiful" },
+        { "value": "minimalist", "label": "Clean & Modern" },
+        { "value": "vintage", "label": "Vintage & Retro" },
+        { "value": "nature", "label": "Nature & Outdoors" }
+      ]
+    },
+    {
+      "id": "photoUpload",
+      "type": "image",
+      "label": "Add a Photo (optional)",
+      "required": false,
+      "maxSize": "5MB",
+      "acceptedFormats": ["png", "jpg", "webp"],
+      "dimensions": {
+        "maxWidth": 1200,
+        "maxHeight": 1200,
+        "aspectRatio": "1:1"
+      }
+    }
+  ],
+
+  "templates": {
+    "default": "festive-balloons",
+    "available": [
+      "festive-balloons",
+      "elegant-gold",
+      "kids-party",
+      "milestone-number",
+      "floral-wreath",
+      "minimalist-modern",
+      "vintage-banner",
+      "nature-garden",
+      "photo-frame"
+    ]
+  },
+
+  "prompts": {
+    "backend": "./prompts/backend.json",
+    "frontend": "./prompts/frontend.json"
+  },
+
+  "assets": {
+    "fonts": [
+      "Playfair Display",
+      "Dancing Script",
+      "Poppins",
+      "Pacifico",
+      "Quicksand",
+      "Lobster"
+    ],
+    "icons": "./assets/icons/",
+    "reference": "./assets/reference/",
+    "textures": "./assets/textures/"
+  },
+
+  "export": {
+    "formats": ["png", "pdf", "jpg"],
+    "defaultFormat": "png",
+    "resolutions": {
+      "web": { "dpi": 72, "scale": 1 },
+      "print": { "dpi": 300, "scale": 4.17 },
+      "retina": { "dpi": 144, "scale": 2 }
+    }
+  },
+
+  "aiWorkflow": {
+    "enabled": true,
+    "provider": "auto",
+    "features": {
+      "backgroundGeneration": true,
+      "styleTransfer": true,
+      "colorHarmonization": true,
+      "textEnhancement": true,
+      "autoComposition": true
+    }
+  }
+}

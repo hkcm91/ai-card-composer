@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "provider": "universal",
+
+  "systemPrompt": {
+    "role": "You are an expert graphic designer specializing in professional business card design with 20 years of experience in corporate branding and print design.",
+    "context": "Generate high-quality background images for business cards that complement text overlay. The backgrounds should enhance professionalism while ensuring text readability.",
+    "constraints": [
+      "Always maintain clear zones in the left portion (0-70% width) for text placement",
+      "Use subtle, non-distracting patterns that don't compete with text",
+      "Ensure sufficient contrast between background elements and text areas",
+      "Avoid placing focal elements where text fields will be positioned",
+      "Create seamless edges suitable for print production",
+      "Consider bleed areas - important elements should be at least 9px from edges"
+    ]
+  },
+
+  "templates": {
+    "backgroundGeneration": {
+      "base": "Create a sophisticated {style} background for a professional business card. Dimensions: {width}x{height} pixels. The design should convey {mood} and {industry} aesthetics.",
+      "variables": {
+        "style": [
+          "gradient",
+          "textured",
+          "geometric",
+          "abstract",
+          "minimalist",
+          "organic",
+          "architectural",
+          "marble",
+          "metallic"
+        ],
+        "mood": [
+          "professional",
+          "innovative",
+          "trustworthy",
+          "creative",
+          "luxurious",
+          "modern",
+          "established",
+          "dynamic",
+          "sophisticated"
+        ],
+        "industry": [
+          "tech startup",
+          "law firm",
+          "creative agency",
+          "financial services",
+          "healthcare",
+          "architecture",
+          "consulting",
+          "real estate",
+          "fashion"
+        ]
+      },
+      "modifiers": {
+        "textSafeZones": "Keep the left side ({leftZone}% of width) clear or very subtle for text overlay. Text will appear at: {zones}",
+        "colorHarmony": "Use colors that complement and contrast well with {primaryColor} text. The accent color is {accentColor}.",
+        "brandAlignment": "Match the visual aesthetic of: {brandDescription}. Incorporate brand colors subtly.",
+        "printReady": "Design should be print-ready at 300 DPI with proper bleed areas."
+      }
+    },
+
+    "styleTransfer": {
+      "base": "Apply the visual style of the reference image to generate a new business card background while maintaining professional standards.",
+      "referenceHandling": "Preserve the color palette, texture quality, and overall mood while creating unique artwork. Adapt the style to fit business card dimensions and text placement requirements."
+    },
+
+    "compositing": {
+      "nanaBanana": {
+        "prompt": "Composite these elements into a cohesive, professional business card design. Ensure seamless blending and consistent lighting.",
+        "layers": [
+          { "type": "background", "source": "{backgroundImage}", "blendMode": "normal" },
+          { "type": "overlay", "source": "{textureOverlay}", "blendMode": "soft-light", "opacity": 0.3 },
+          { "type": "accent", "source": "{decorativeElements}", "blendMode": "screen", "opacity": 0.5 }
+        ]
+      },
+      "generic": {
+        "prompt": "Blend these design elements into a unified business card background:",
+        "instructions": [
+          "Maintain consistent color temperature across all layers",
+          "Ensure text areas remain unobstructed",
+          "Apply subtle vignette for depth",
+          "Balance visual weight towards the right side"
+        ]
+      }
+    }
+  },
+
+  "qualityEnhancers": [
+    "ultra high resolution",
+    "professional photography quality",
+    "print-ready",
+    "crisp details",
+    "balanced composition",
+    "elegant lighting",
+    "subtle depth of field",
+    "refined color palette",
+    "premium finish appearance"
+  ],
+
+  "negativePrompts": [
+    "text",
+    "letters",
+    "words",
+    "numbers",
+    "watermark",
+    "signature",
+    "logo",
+    "blurry",
+    "low quality",
+    "pixelated",
+    "distorted",
+    "noisy",
+    "grainy",
+    "oversaturated",
+    "cartoonish",
+    "childish",
+    "busy pattern",
+    "cluttered",
+    "harsh contrast",
+    "jpeg artifacts"
+  ],
+
+  "stylePresets": {
+    "corporate": {
+      "prompt": "Clean corporate aesthetic with subtle gradients and professional tones",
+      "enhancers": ["corporate environment", "office aesthetics", "business professional"],
+      "colorBias": "blues, grays, whites"
+    },
+    "creative": {
+      "prompt": "Bold creative design with artistic elements and dynamic composition",
+      "enhancers": ["artistic flair", "creative energy", "design-forward"],
+      "colorBias": "vibrant accents on neutral base"
+    },
+    "luxury": {
+      "prompt": "Premium luxury aesthetic with rich textures and sophisticated details",
+      "enhancers": ["luxury materials", "gold accents", "premium quality", "refined elegance"],
+      "colorBias": "deep blacks, golds, rich jewel tones"
+    },
+    "minimal": {
+      "prompt": "Ultra-minimal design with clean space and subtle accents",
+      "enhancers": ["negative space", "clean lines", "understated elegance"],
+      "colorBias": "monochromatic, single accent"
+    },
+    "tech": {
+      "prompt": "Modern tech aesthetic with digital elements and futuristic feel",
+      "enhancers": ["digital patterns", "tech-inspired", "innovative design"],
+      "colorBias": "electric blues, cyans, deep purples"
+    }
+  }
+}
